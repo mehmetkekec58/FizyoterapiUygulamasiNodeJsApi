@@ -29,7 +29,7 @@ console.log(rr)
 
 app.use("/api/auth", router);
 
-app.listen(8080, () => 
+app.listen(process.env.PORT, () => 
     console.log("Server baslatildi"))
 
 
