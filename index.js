@@ -13,19 +13,8 @@ app.use(morgan("common"));
 app.use(helmet());
 //app.use('/', express.static('routes'));
 app.get("/", async (req, res) => {
- /* const ne= new User(2,"mehmetkekec","Mehmet","Kekeç",34);
-rr = await AuthService.register(ne)
-console.log(rr)
-  tt=await AuthService.login(ne)
-    res.send(tt)
-    console.log(tt)*/
-    //  res.status(200).json(tt)
-    res.send("Hello world")
+    res.send("anasayfa")
 })
-
-/*app.get("/api/auth/login", (req,res)=>{
-    res.send("lpogin")
-})*/
 
 app.use("/api/auth", router);
 
