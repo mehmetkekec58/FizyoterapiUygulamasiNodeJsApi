@@ -3,7 +3,7 @@ const UserDto = require("../models/dto/userDto")
 const authDao = require("../databases/authDao")
 
 var authService = {
-    login:async (UserDto)=>{
+    async login(UserDto){
     return await authDao.login(UserDto);
         
         
