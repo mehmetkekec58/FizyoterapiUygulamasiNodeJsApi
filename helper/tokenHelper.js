@@ -1,27 +1,27 @@
 const jwt = require('jsonwebtoken')
 
 const User = require('../models/user')
-
+const Token = require('../models/token')
 const errorDataResult = require('../result/errorDataResult')
 const successDataResult = require('../result/successDataResult')
+const errorResult = require('../result/errorResult')
 
 const constMessage = require("../constants/messages")
 const defaultValue = require("../constants/defaultValue")
-const successResult = require('../result/successResult')
 
 
 
 const tokenHelper = {
     async tokenCreate(User) {
-        await jwt.sign({ User }, defaultValue.secretkey, (err, token) => {
-            if (err) {
-                return new errorResult(constMessage.TokenOlusturmaBasarisiz)
-            }
-            return new successDataResult(token, constMessage.TokenOlusturuldu);
-        })
-    },
+        let exp = Math.floor(Date.now() / 1000) + (60 * 60);
+        var token = await jwt.sign({ Expiration: exp, user: User[0] }, defaultValue.secretkey);
+        if (token) {
+            return new successDataResult(new Token(token, exp), constMessage.TokenOlusturuldu);
+        }
+        return new errorResult(constMessage.TokenOlusturmaBasarisiz);
 
-    tokenDogrulu(req, res, next) {
+    },
+    tokenDogrula(req, res, next) {
         const bearerHeader = req.headers['authorization'];
         if (typeof bearerHeader !== undefined) {
             const bearerToken = bearerHeader.split(' ')[1];
@@ -31,12 +31,13 @@ const tokenHelper = {
             return new errorDataResult(403, constMessage.YetkisizYok)
         }
     },
-    async jwtDogrulama(req, res) {
-        await jwt.verify(req.token, defaultValue.secretkey, (err, authData) => {
-            if (err) {
-                return new errorDataResult(403, constMessage.TokenDogrulanamadi)
-            } else {
-                return new successDataResult(authData,constMessage.TokenDogrulandi)
-            }})
-        }}
+    async jwtDogrulama() {
+        var decoded = await jwt.verify(token, defaultValue.secretkey);
+        if (decoded) {
+            return new successDataResult(decoded.user, constMessage.TokenDogrulandi)
+        } else {
+            return new errorDataResult(403, constMessage.TokenDogrulanamadi)
+        }
+    }
+}
 module.exports = tokenHelper

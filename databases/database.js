@@ -2,7 +2,7 @@
 const postgresql = require("./databaseConfig/postgreSql");
 
 module.exports=mysqlcon
-*/
+*//*
 var databaseBase = class{
     Connect(){
 
@@ -11,4 +11,4 @@ var databaseBase = class{
         
     }
 }
-module.exports=databaseBase
+module.exports=databaseBase*/
