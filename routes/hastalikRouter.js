@@ -51,5 +51,35 @@ router.post("/add", async (req, res) => {
     }
 })
 
+router.post("/update", async (req, res) => {
+    try {
+      
+        const updateHastalik = await hastalikService.updateHastalik(req.body);
+
+        if (updateHastalik.success) {
+            res.status(200).json(updateHastalik)
+        } else {
+            res.status(500).json(updateHastalik)
+        }
+    } catch (error) {
+        res.status(500).json(new errorDataResult(error, constMessage.birSeylerYanlisGitti))
+    }
+})
+
+router.delete("/delete", async (req, res) => {
+    try {
+      
+        const deleteHastalik = await hastalikService.deleteHastalik(req.query);
+
+        if (deleteHastalik.success) {
+            res.status(200).json(deleteHastalik)
+        } else {
+            res.status(500).json(deleteHastalik)
+        }
+    } catch (error) {
+        res.status(500).json(new errorDataResult(error, constMessage.birSeylerYanlisGitti))
+    }
+})
+
 
 module.exports = router

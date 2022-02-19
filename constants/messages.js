@@ -27,11 +27,20 @@ const constMessage={
     hastalikEklendi:"Hastalık eklendi",
     hastalikEklenemedi:"Hastalık eklenemedi",
     hastalikGetirildi:"Hastalık getirildi",
+    hastalikGuncellendi:"Hastalık güncellendi",
+    hastalikGuncellenemedi:"Hastalık güncellenemdi",
+    hastalikSilindi:"Hastalık Silindi",
+    hastalikSilinemedi:"Hastalık silinemedi",
+
 
     iceriklerListelendi:"İçerikler listelendi",
     icerikListelemeBasarisiz:"İçerik listeleme başarısız",
     icerikEklendi:"İçerik eklendi",
-    icerikEklenemedi:"İçerik eklenemedi"
+    icerikEklenemedi:"İçerik eklenemedi",
+    icerikGuncellendi:"İçerik güncellendi",
+    icerikGuncellenemedi:"İçerik güncellenemedi",
+    icerikSilindi:"İçerik silindi",
+    icerikSilinemedi:"İçerik silinemedi"
 
 }
 

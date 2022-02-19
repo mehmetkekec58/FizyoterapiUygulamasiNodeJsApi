@@ -40,7 +40,7 @@ var HastalikDao = {
         let values = [hastalik.name, hastalik.aciklama, hastalik.photoUrl];
         let sql = "INSERT INTO hastaliklar (name, aciklama, photo_url) VALUES ($1, $2, $3)";
         try {
-            const hastalikAdd =  (await pool.query(sql, values)).rowCount
+            const hastalikAdd = (await pool.query(sql, values)).rowCount
             if (hastalikAdd > 0) {
                 return new successResult(constMessage.hastalikEklendi);
             } else {
@@ -49,6 +49,39 @@ var HastalikDao = {
         } catch (error) {
             return new errorDataResult(error, constMessage.birSeylerYanlisGitti);
         }
-    }
+    },
+    async updateHastalik(hastalik) {
+        let values = [hastalik.name, hastalik.aciklama, hastalik.photoUrl, hastalik.id];
+        let sql = "UPDATE hastaliklar SET name = $1, aciklama = $2 , photo_url = $3 WHERE id = $4";
+
+        try {
+            const updataHastalik = (await pool.query(sql, values)).rowCount
+            if (updataHastalik > 0) {
+                return new successResult(constMessage.hastalikGuncellendi);
+            } else {
+                return new errorResult(constMessage.hastalikGuncellenemedi);
+            }
+        } catch (error) {
+            return new errorResult(error.detail);
+        }
+    },
+
+    async deleteHastalik(hastalikId) {
+
+        let sql = "DELETE FROM hastaliklar WHERE id = $1";
+
+        try {
+            const deleteHastalik = (await pool.query(sql, [hastalikId])).rowCount
+          
+            if (deleteHastalik > 0) {
+                return new successResult(constMessage.hastalikSilindi);
+            } else {
+                return new errorResult(constMessage.hastalikSilinemedi);
+            }
+        } catch (error) {
+            return new errorResult(error.detail);
+        }
+    },
 }
+
 module.exports = HastalikDao

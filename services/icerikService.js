@@ -5,9 +5,9 @@ const errorResult = require('../result/errorResult');
 
 var icerikService ={
     async getAll(hastalikId){
-        if (degerlerVarMi(hastalikId)){ 
+        if (degerlerVarMi(hastalikId))
         return await icerikDao.getAll(hastalikId.id)
-        }else
+        else
         return new errorResult(constMessage.bosAlanBirakmayin);
 
         function degerlerVarMi(query) {
@@ -17,10 +17,10 @@ var icerikService ={
                 return false;
     }
 },
- async addİcerik(icerik){
-    if (degerlerVarMi(icerik)){ 
-        return await icerikDao.addİcerik(icerik)
-        }else
+ async addIcerik(icerik){
+    if (degerlerVarMi(icerik))
+        return await icerikDao.addIcerik(icerik)
+        else
         return new errorResult(constMessage.bosAlanBirakmayin);
 
         function degerlerVarMi(body) {
@@ -29,6 +29,32 @@ var icerikService ={
             else
                 return false;
     }
+ },
+ async updateIcerik(icerik){
+    if (degerlerVarMi(icerik))
+    return await icerikDao.updateIcerik(icerik)
+    else
+    return new errorResult(constMessage.bosAlanBirakmayin);
+
+    function degerlerVarMi(body) {
+        if (body.id && body.hastalikId && body.gifUrl && body.aciklama && body.siralama)
+            return true;
+        else
+            return false;
  }
+},
+async deleteIcerik(icerik){
+    if (degerlerVarMi(icerik))
+    return await icerikDao.deleteIcerik(icerik.id)
+    else
+    return new errorResult(constMessage.bosAlanBirakmayin);
+
+    function degerlerVarMi(query) {
+        if (query.id)
+            return true;
+        else
+            return false;
+ }
+}
 }
 module.exports=icerikService

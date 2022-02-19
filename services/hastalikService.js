@@ -33,5 +33,31 @@ var hastalikService = {
                 return false;
     }
 },
+async updateHastalik(hastalik){
+    if (degerlerVarMi(hastalik))
+    return await HastalikDao.updateHastalik(hastalik)
+    else
+    return new errorResult(constMessage.bosAlanBirakmayin);
+
+    function degerlerVarMi(body) {
+        if (body.id && body.name && body.aciklama && body.photoUrl)
+            return true;
+        else
+            return false;
+ }
+},
+async deleteHastalik(hastalik){
+    if (degerlerVarMi(hastalik))
+    return await HastalikDao.deleteHastalik(hastalik.id)
+    else
+    return new errorResult(constMessage.bosAlanBirakmayin);
+
+    function degerlerVarMi(query) {
+        if (query.id)
+            return true;
+        else
+            return false;
+ }
+}
 }
 module.exports = hastalikService
