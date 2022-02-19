@@ -1,6 +1,5 @@
 const jwt = require('jsonwebtoken')
 
-const User = require('../models/user')
 const Token = require('../models/token')
 const errorDataResult = require('../result/errorDataResult')
 const successDataResult = require('../result/successDataResult')
@@ -12,9 +11,10 @@ const defaultValue = require("../constants/defaultValue")
 
 
 const tokenHelper = {
-    async tokenCreate(User) {
+    async tokenCreate(user) {
+        
         let exp = Math.floor(Date.now() / 1000) + (60 * 60);
-        var token = await jwt.sign({ Expiration: exp, user: User[0] }, defaultValue.secretkey);
+        var token = await jwt.sign({ Expiration: exp, user: user }, defaultValue.secretkey);
         if (token) {
             return new successDataResult(new Token(token, exp), constMessage.tokenOlusturuldu);
         }

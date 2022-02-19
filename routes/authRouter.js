@@ -38,9 +38,9 @@ router.post("/register", async (req, res) => {
 
   const auth = await authService.register(req.body)
   if (auth.success) {
-    res.status(200).json(new successResult(auth.message))
+    res.status(200).json(auth)
   } else {
-    res.status(500).json(new errorResult(auth.message))
+    res.status(500).json(auth)
   }
 
 
