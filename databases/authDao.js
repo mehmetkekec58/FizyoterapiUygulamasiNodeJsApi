@@ -29,9 +29,8 @@ const authDao = {
 
     },
     async register(user) {
-        let values = [user.email, user.firstName, user.lastName, user.userName, user.age, user.password, user.profilePhotoUrl, user.aboutMe]
-        // let sql = "INSERT INTO Users (email, first_name, last_name, username, age, password, profile_photo_url, about_me) VALUES ('" + user.email + "','" + user.firstName + "', '" + user.lastName + "', '" + user.userName + "', '" + user.age + "', '" + user.password + "', '" + user.profilePhotoUrl + "', '" + user.aboutMe + "')";
-        let sql = "INSERT INTO Users (email, first_name, last_name, username, age, password, profile_photo_url, about_me) VALUES ($1,$2,$3,$4,$5,$6,$7,$8)";
+        let values = [user.email, user.firstName, user.lastName, user.userName, user.age, user.password, user.profilePhotoUrl, user.aboutMe, user.yetki]
+        let sql = "INSERT INTO Users (email, first_name, last_name, username, age, password, profile_photo_url, about_me,yetki) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9)";
         try {
             const registerUser = (await pool.query(sql, values)).rowCount
             if (registerUser > 0) {

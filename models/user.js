@@ -8,6 +8,7 @@ var User  = class {
             this.email=email
             this.profilePhotoUrl=profilePhotoUrl
             this.aboutMe=aboutMe
+            this.yetki="normal"
          }
        };
 
