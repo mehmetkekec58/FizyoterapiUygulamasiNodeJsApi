@@ -1,25 +1,27 @@
 const constMessage={
-    GirisBasarili:"Giriş başarılı",
-    GirisBasarisiz:"Giriş başarısız",
-    KullaniciBulunamadi:"Kullanıcı bulunamadı",
-    KullaniciBulundu:"Kullanıcı Bulundu",
+    girisBasarili:"Giriş başarılı",
+    girisBasarisiz:"Giriş başarısız",
+    kullaniciBulunamadi:"Kullanıcı bulunamadı",
+    kullaniciBulundu:"Kullanıcı Bulundu",
     sifreYanlis:"Şifre yanlış",
     sifreVeyaEpostaYanlis:"Şifre veya e-posta adresi yanlış",
 
-    BasariylaKaydoldun:"Başarıyla Kaydoldun",
-    KaydolmaBasarisiz:"Kaydolama başarısız",
 
-    BirSeylerYanlisGitti:"Bir şeyler yanlış gitti",
+    basariylaKaydoldun:"Başarıyla Kaydoldun",
+    kaydolmaBasarisiz:"Kaydolama başarısız",
+
+    birSeylerYanlisGitti:"Bir şeyler yanlış gitti",
     bosAlanBirakmayin:"Boş alan bırakmayın",
 
-    TokenOlusturmaBasarisiz:"Token oluşturma başarısız",
-    TokenOlusturuldu:"Token oluşturuldu",
-    TokenDogrulanamadi:"Token doğrulanamadi",
-    TokenDogrulandi:"Token Doğrulandı",
+    tokenOlusturmaBasarisiz:"Token oluşturma başarısız",
+    tokenOlusturuldu:"Token oluşturuldu",
+    tokenDogrulanamadi:"Token doğrulanamadi",
+    tokenDogrulandi:"Token Doğrulandı",
 
-    YetkisizYok:"Yetkiniz yok",
+    yetkinizYok:"Yetkiniz yok",
 
     hastaliklarlistelendi:"Hastalıklar listelendi",
+    hastaliklarListelenemedi:"Hastalıklar listelenemedi",
     hastaliklarGetirilemedi:"Hastalıklar getirilemedi",
     hastalikGetirilemedi:"Hastalık getirilemedi",
     hastalikEklendi:"Hastalık eklendi",

@@ -1,6 +1,7 @@
 const constMessage = require('../constants/messages');
 const Hastalik = require('../models/hastalik');
 const errorResult = require('../result/errorResult');
+const errorDataResult = require('../result/errorDataResult');
 const successResult = require('../result/successResult');
 const successDataResult = require('../result/successDataResult');
 const hastalikService = require('../services/hastalikService');
@@ -12,12 +13,12 @@ router.get("/getall", async (req, res) => {
     try {
         const hastalikGetAll = await hastalikService.getAll()
         if (hastalikGetAll.success) {
-            res.status(200).json(new successDataResult(hastalikGetAll.data, constMessage.hastaliklarlistelendi))
+            res.status(200).json(hastalikGetAll)
         } else {
-            res.status(500).json(new errorResult(hastalikGetAll.message))
+            res.status(500).json(hastalikGetAll)
         }
     } catch (error) {
-        res.status(500).json(new errorResult(constMessage.BirSeylerYanlisGitti))
+        res.status(500).json(new errorDataResult(error,constMessage.birSeylerYanlisGitti))
     }
 
 

@@ -23,12 +23,12 @@ router.post("/login", async (req, res) => {
   try {
     const auth = await authService.login(req.body)
     if (auth.success) {
-      res.status(200).json(new successDataResult(auth.data, constMessage.GirisBasarili))
+      res.status(200).json(new successDataResult(auth.data, constMessage.girisBasarili))
     } else {
       res.status(500).json(auth)
     }
   } catch (error) {
-    res.status(500).json(new errorResult(constMessage.BirSeylerYanlisGitti))
+    res.status(500).json(new errorResult(constMessage.birSeylerYanlisGitti))
   }
 
 

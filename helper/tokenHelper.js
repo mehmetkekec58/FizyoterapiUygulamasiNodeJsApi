@@ -16,9 +16,9 @@ const tokenHelper = {
         let exp = Math.floor(Date.now() / 1000) + (60 * 60);
         var token = await jwt.sign({ Expiration: exp, user: User[0] }, defaultValue.secretkey);
         if (token) {
-            return new successDataResult(new Token(token, exp), constMessage.TokenOlusturuldu);
+            return new successDataResult(new Token(token, exp), constMessage.tokenOlusturuldu);
         }
-        return new errorResult(constMessage.TokenOlusturmaBasarisiz);
+        return new errorResult(constMessage.tokenOlusturmaBasarisiz);
 
     },
     tokenDogrula(req, res, next) {
@@ -28,15 +28,15 @@ const tokenHelper = {
             req.token = bearerToken
             next()
         } else {
-            return new errorDataResult(403, constMessage.YetkisizYok)
+            return new errorDataResult(403, constMessage.yetkinizYok)
         }
     },
     async jwtDogrulama() {
         var decoded = await jwt.verify(token, defaultValue.secretkey);
         if (decoded) {
-            return new successDataResult(decoded.user, constMessage.TokenDogrulandi)
+            return new successDataResult(decoded.user, constMessage.tokenDogrulandi)
         } else {
-            return new errorDataResult(403, constMessage.TokenDogrulanamadi)
+            return new errorDataResult(403, constMessage.tokenDogrulanamadi)
         }
     }
 }

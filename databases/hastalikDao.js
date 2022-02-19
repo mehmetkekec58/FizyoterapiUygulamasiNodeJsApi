@@ -13,15 +13,14 @@ var HastalikDao = {
         let sql = "SELECT * FROM hastaliklar";
         try {
             const hastaliklar = (await pool.query(sql)).rows;
-            //  const loginUser = await entityRepositoryBase.birParametreyeGoreGetirme("users","email",UserDto.email)
             //  console.log(hastaliklar.find(p=>p.id == 1))  
             if (hastaliklar.length > 0) {
                 return new successDataResult(hastaliklar, constMessage.hastaliklarlistelendi);
             } else {
-                return new errorResult(constMessage.hastaliklarGetirilemedi);
+                return new errorResult(constMessage.hastaliklarListelenemedi);
             }
         } catch (error) {
-            return new errorDataResult(error, constMessage.BirSeylerYanlisGitti);
+            return new errorDataResult(error, constMessage.birSeylerYanlisGitti);
         }
     },
     async getById(id) {
@@ -29,12 +28,12 @@ var HastalikDao = {
         try {
             const getByIdHastalik = (await pool.query(sql, [id])).rows;
             if (getByIdHastalik.length > 0) {
-                return new successDataResult(getByIdHastalik, constMessage.hastaliklarlistelendi);
+                return new successDataResult(getByIdHastalik, constMessage.hastalikGetirildi);
             } else {
                 return new errorDataResult(error, constMessage.hastalikGetirilemedi);
             }
         } catch (error) {
-            return new errorDataResult(error, constMessage.BirSeylerYanlisGitti);
+            return new errorDataResult(error, constMessage.birSeylerYanlisGitti);
         }
     },
     async add(hastalik) {
@@ -48,7 +47,7 @@ var HastalikDao = {
                 return new errorResult(constMessage.hastalikEklenemedi);
             }
         } catch (error) {
-            return new errorDataResult(error, constMessage.BirSeylerYanlisGitti);
+            return new errorDataResult(error, constMessage.birSeylerYanlisGitti);
         }
     }
 }

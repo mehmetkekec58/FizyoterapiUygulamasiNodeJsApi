@@ -13,35 +13,32 @@ const authDao = {
     async login(userDto) {
         let sql = "SELECT * FROM users WHERE email = $1";
         try {
-            const loginUser = (await pool.query(sql,[userDto.email])).rows;
-            //  const loginUser = await entityRepositoryBase.birParametreyeGoreGetirme("users","email",UserDto.email)
+            const loginUser = (await pool.query(sql, [userDto.email])).rows;
             if (loginUser.length > 0) {
 
-                return new successDataResult(loginUser[0], constMessage.KullaniciBulundu);
+                return new successDataResult(loginUser[0], constMessage.kullaniciBulundu);
 
             } else {
-              
+
                 return new errorResult(constMessage.sifreVeyaEpostaYanlis);
             }
 
         } catch (error) {
-            return new errorResult(constMessage.BirSeylerYanlisGitti);
+            return new errorResult(error.detail);
         }
 
     },
     async register(user) {
-        //let tabloKolonlari=["email", "first_name", "last_name", "username", "age", "password", "profile_photo_url", "about_me"];
-        let values =[user.email,user.firstName,user.lastName,user.userName,user.age,user.password,user.profilePhotoUrl,user.aboutMe] 
-       // let sql = "INSERT INTO Users (email, first_name, last_name, username, age, password, profile_photo_url, about_me) VALUES ('" + user.email + "','" + user.firstName + "', '" + user.lastName + "', '" + user.userName + "', '" + user.age + "', '" + user.password + "', '" + user.profilePhotoUrl + "', '" + user.aboutMe + "')";
+        let values = [user.email, user.firstName, user.lastName, user.userName, user.age, user.password, user.profilePhotoUrl, user.aboutMe]
+        // let sql = "INSERT INTO Users (email, first_name, last_name, username, age, password, profile_photo_url, about_me) VALUES ('" + user.email + "','" + user.firstName + "', '" + user.lastName + "', '" + user.userName + "', '" + user.age + "', '" + user.password + "', '" + user.profilePhotoUrl + "', '" + user.aboutMe + "')";
         let sql = "INSERT INTO Users (email, first_name, last_name, username, age, password, profile_photo_url, about_me) VALUES ($1,$2,$3,$4,$5,$6,$7,$8)";
         try {
-            const registerUser = (await pool.query(sql,values)).rowCount
-            //console.log(registerUser)
+            const registerUser = (await pool.query(sql, values)).rowCount
             if (registerUser > 0) {
-                return new successResult(constMessage.BasariylaKaydoldun);
-            }else{
-            return new errorResult(constMessage.KaydolmaBasarisiz);
-        }
+                return new successResult(constMessage.basariylaKaydoldun);
+            } else {
+                return new errorResult(constMessage.kaydolmaBasarisiz);
+            }
         } catch (error) {
             return new errorResult(error.detail);
         }
