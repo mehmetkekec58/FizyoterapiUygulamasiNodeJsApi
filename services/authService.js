@@ -35,7 +35,7 @@ var authService = {
             return await passwordHash2.passwordDogrula(userPass, hashedPassword)
         }
         async function degerlerVarMi(body) {
-            if (!body.email && !body.password)
+            if (body.email && body.password)
                 return true;
             else
                 return false;
@@ -57,7 +57,7 @@ var authService = {
             return new errorResult(constMessage.bosAlanBirakmayin);
 
         async function degerlerVarMi(body) {
-            if (!body.userName && !body.firstName && !body.lastName && !body.password && !body.age && !body.email && !body.aboutMe)
+            if (body.userName && body.firstName && body.lastName && body.password && body.age && body.email)
                 return true;
             else
                 return false;

@@ -30,6 +30,8 @@ const constMessage={
 
     iceriklerListelendi:"İçerikler listelendi",
     icerikListelemeBasarisiz:"İçerik listeleme başarısız",
+    icerikEklendi:"İçerik eklendi",
+    icerikEklenemedi:"İçerik eklenemedi"
 
 }
 

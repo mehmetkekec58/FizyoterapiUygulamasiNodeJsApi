@@ -46,6 +46,7 @@ router.post("/add", async (req, res) => {
         }
 
     } catch (error) {
+  
         res.status(500).json(new errorDataResult(error,constMessage.birSeylerYanlisGitti))
     }
 })

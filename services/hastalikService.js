@@ -1,3 +1,4 @@
+const constMessage = require("../constants/messages");
 const HastalikDao = require("../databases/hastalikDao");
 
 const errorResult = require("../result/errorResult");
@@ -12,8 +13,8 @@ var hastalikService = {
         else
             return new errorResult(constMessage.bosAlanBirakmayin);
 
-        async function degerlerVarMi(query) {
-            if (!query.id)
+         function degerlerVarMi(query) {
+            if (query.id)
                 return true;
             else
                 return false;
@@ -22,12 +23,11 @@ var hastalikService = {
     async add(hastalik) {
         if (degerlerVarMi(hastalik)) 
             return await HastalikDao.add(hastalik);
-            else
+           else
             return new errorResult(constMessage.bosAlanBirakmayin);
-       
-
-        async function degerlerVarMi(body) {
-            if (!body.name && !body.aciklama && !body.photoUrl)
+           
+         function degerlerVarMi(body) {
+            if (body.name && body.aciklama && body.photoUrl)
                 return true;
             else
                 return false;

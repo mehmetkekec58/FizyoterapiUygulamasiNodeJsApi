@@ -19,7 +19,7 @@ app.get("/", (req, res) => {
 app.use("/api/auth", authRoute);
 app.use("/api/hastalik", hastalikRoute);
 app.use("/api/deneme", denemeRoute);
-//app.use("/api/icerik", icerikRouter)
+app.use("/api/icerik", icerikRouter)
 
 app.listen(8080, () => 
     console.log("Server başlatıldı"))
