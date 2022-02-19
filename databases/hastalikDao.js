@@ -30,7 +30,7 @@ var HastalikDao = {
             if (getByIdHastalik.length > 0) {
                 return new successDataResult(getByIdHastalik, constMessage.hastalikGetirildi);
             } else {
-                return new errorDataResult(error, constMessage.hastalikGetirilemedi);
+                return new errorDataResult(constMessage.hastalikGetirilemedi);
             }
         } catch (error) {
             return new errorDataResult(error, constMessage.birSeylerYanlisGitti);
