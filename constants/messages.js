@@ -3,6 +3,7 @@ const constMessage={
     GirisBasarisiz:"Giriş başarısız",
     KullaniciBulunamadi:"Kullanıcı bulunamadı",
     KullaniciBulundu:"Kullanıcı Bulundu",
+    sifreYanlis:"Şifre yanlış",
 
     BasariylaKaydoldun:"Başarıyla Kaydoldun",
     KaydolmaBasarisiz:"Kaydolama başarısız",
@@ -25,7 +26,7 @@ const constMessage={
     hastalikGetirildi:"Hastalık getirildi",
 
     iceriklerListelendi:"İçerikler listelendi",
-    icerikListelemeBasarisiz:"İçerik listeleme başarısız"
+    icerikListelemeBasarisiz:"İçerik listeleme başarısız",
 
 }
 

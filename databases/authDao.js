@@ -1,6 +1,3 @@
-const User = require('../models/user')
-const UserDto = require("../models/dto/userDto");
-
 const constMessage = require("../constants/messages")
 
 const pool = require('./dataBaseConfig/postgreSql');
@@ -13,10 +10,10 @@ const successResult = require('../result/successResult');
 
 
 const authDao = {
-    async login(UserDto) {
-        let sql = "SELECT * FROM users WHERE email = '" + UserDto.email + "'";
+    async login(userDto) {
+        let sql = "SELECT * FROM users WHERE email = $1";
         try {
-            const loginUser = await (await pool.query(sql)).rows;
+            const loginUser = (await pool.query(sql,[userDto.email])).rows;
             //  const loginUser = await entityRepositoryBase.birParametreyeGoreGetirme("users","email",UserDto.email)
             if (loginUser.length > 0) {
 
@@ -32,15 +29,13 @@ const authDao = {
 
     },
     async register(user) {
-        //  let tabloName ="users"
         //let tabloKolonlari=["email", "first_name", "last_name", "username", "age", "password", "profile_photo_url", "about_me"];
-        //let values =[user.email,user.firstName,user.lastName,user.userName,user.age,user.password,user.profilePhotoUrl,user.aboutMe] 
-        let sql = "INSERT INTO Users (email, first_name, last_name, username, age, password, profile_photo_url, about_me) VALUES ('" + user.email + "','" + user.firstName + "', '" + user.lastName + "', '" + user.userName + "', '" + user.age + "', '" + user.password + "', '" + user.profilePhotoUrl + "', '" + user.aboutMe + "')";
-        // let sql = await sqlMetinOlusturucu.addSqlMetinUret(tabloName,tabloKolonlari,values)
+        let values =[user.email,user.firstName,user.lastName,user.userName,user.age,user.password,user.profilePhotoUrl,user.aboutMe] 
+       // let sql = "INSERT INTO Users (email, first_name, last_name, username, age, password, profile_photo_url, about_me) VALUES ('" + user.email + "','" + user.firstName + "', '" + user.lastName + "', '" + user.userName + "', '" + user.age + "', '" + user.password + "', '" + user.profilePhotoUrl + "', '" + user.aboutMe + "')";
+        let sql = "INSERT INTO Users (email, first_name, last_name, username, age, password, profile_photo_url, about_me) VALUES ($1,$2,$3,$4,$5,$6,$7,$8)";
         try {
-            const registerUser = await (await pool.query(sql)).rowCount
+            const registerUser = (await pool.query(sql,values)).rowCount
             //console.log(registerUser)
-            //const loginUser =await entityRepositoryBase.cokluParametreyleEkleme(tabloName,tabloKolonlari,values);
             if (registerUser > 0) {
                 return new successResult(constMessage.BasariylaKaydoldun);
             }else{

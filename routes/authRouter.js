@@ -21,7 +21,7 @@ const passwordHash2 = require('../helper/passwordHashHelper');
 
 router.post("/login", async (req, res) => {
  try {
-    const auth = await authService.login(await new UserDto(req.body.email, req.body.password))
+    const auth = await authService.login(req.body)
     if (auth.success) {
       res.status(200).json(await new successDataResult(auth.data,constMessage.GirisBasarili))
     }else{
@@ -30,13 +30,13 @@ router.post("/login", async (req, res) => {
   } catch (error) {
     res.status(500).json(await new errorResult(constMessage.BirSeylerYanlisGitti))
   }
+  
 
 })
 
 router.post("/register", async (req, res) => {
 
-   const auth = await authService.register( await new User(req.body.userName, req.body.firstName, req.body.lastName,
-    req.body.password, req.body.age, req.body.email, defaultValue.defaultPhotoUrl, req.body.aboutMe))
+   const auth = await authService.register(req.body)
     if (auth.success) {
       res.status(200).json(new successResult(auth.message))
     }else{

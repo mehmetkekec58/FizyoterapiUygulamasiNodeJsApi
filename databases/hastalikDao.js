@@ -14,7 +14,6 @@ var HastalikDao = {
         try {
             const hastaliklar = (await pool.query(sql)).rows;
             //  const loginUser = await entityRepositoryBase.birParametreyeGoreGetirme("users","email",UserDto.email)
-            //  console.log(hastaliklar)
             //  console.log(hastaliklar.find(p=>p.id == 1))  
             if (hastaliklar.length > 0) {
                 return new successDataResult(hastaliklar, constMessage.hastaliklarlistelendi);
@@ -26,9 +25,9 @@ var HastalikDao = {
         }
     },
     async getById(id) {
-        let sql = "SELECT * FROM hastaliklar WHERE id='" + id + "'";
+        let sql = "SELECT * FROM hastaliklar WHERE id= $1";
         try {
-            const getByIdHastalik = (await pool.query(sql)).rows;
+            const getByIdHastalik = (await pool.query(sql, [id])).rows;
             if (getByIdHastalik.length > 0) {
                 return new successDataResult(getByIdHastalik, constMessage.hastaliklarlistelendi);
             } else {
@@ -38,19 +37,16 @@ var HastalikDao = {
             return new errorDataResult(error, constMessage.BirSeylerYanlisGitti);
         }
     },
-    async add(hastalik){
-        let sql = "INSERT INTO hastaliklar (name, aciklama, photo_url) VALUES ('"+hastalik.name+"', '"+hastalik.aciklama+"', '"+hastalik.photoUrl+"')";
+    async add(hastalik) {
+        let values = [hastalik.name, hastalik.aciklama, hastalik.photoUrl];
+        let sql = "INSERT INTO hastaliklar (name, aciklama, photo_url) VALUES ($1, $2, $3)";
         try {
-           
-            const hastalikAdd = (await pool.query(sql)).rowCount
-        //  console.log(hastalikAdd)
-       //     console.log(hastalikAdd)
+            const hastalikAdd =  (await pool.query(sql, values)).rowCount
             if (hastalikAdd > 0) {
                 return new successResult(constMessage.hastalikEklendi);
-            }else{
-            return new errorResult(constMessage.hastalikEklenemedi);
-        }
-
+            } else {
+                return new errorResult(constMessage.hastalikEklenemedi);
+            }
         } catch (error) {
             return new errorDataResult(error, constMessage.BirSeylerYanlisGitti);
         }
