@@ -4,6 +4,7 @@ const constMessage={
     KullaniciBulunamadi:"Kullanıcı bulunamadı",
     KullaniciBulundu:"Kullanıcı Bulundu",
     sifreYanlis:"Şifre yanlış",
+    sifreVeyaEpostaYanlis:"Şifre veya e-posta adresi yanlış",
 
     BasariylaKaydoldun:"Başarıyla Kaydoldun",
     KaydolmaBasarisiz:"Kaydolama başarısız",

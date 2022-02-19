@@ -20,16 +20,16 @@ var authService = {
                 if (await passwordDogrulamaIslemi(userDto.password, auth.data.password))
                     return await tokenOlusmaIslemleri(auth.data)
                 else
-                    return new errorResult(constMessage.sifreYanlis)
+                    return new errorResult(constMessage.sifreVeyaEpostaYanlis)
             } else {
-                return auth.message;
+                return auth;
             }
         } else
             return new errorResult(constMessage.bosAlanBirakmayin);
 
         // kontrol fonksiyonları
-        async function tokenOlusmaIslemleri(params) {
-            return await tokenHelper.tokenCreate(params);
+        async function tokenOlusmaIslemleri(user) {
+            return await tokenHelper.tokenCreate(user);
         }
         async function passwordDogrulamaIslemi(userPass, hashedPassword) {
             return await passwordHash2.passwordDogrula(userPass, hashedPassword)
@@ -41,24 +41,21 @@ var authService = {
                 return false;
 
         }
-        async function rules([rules]) {
-            rules.forEach(e => {
-                if (!e.success)
-                    return new errorDataResult(e.data, e.message);
-            });
-                return new successResult();
-
-
-            
-        }
-
-
+        /* async function rules(rules) {
+             rules.forEach(e => {
+                 if (!e.success)
+                     return new errorDataResult(e.data, e.message);
+             });
+                 return new successResult();
+             
+         }*/
     },
     async register(user) {
-        if (degerlerVarMi(user)) {
-            return await authDao.register(new User(user.userName, user.firstName, user.lastName,
-                await passwordHash2.passwordHash(user.password), user.age, user.email, defaultValue.defaultPhotoUrl, user.aboutMe))
-        }
+        if (degerlerVarMi(user))
+            return await authDao.register(new User(user.userName, user.firstName, user.lastName, await passwordHash2.passwordHash(user.password), user.age, user.email, defaultValue.defaultPhotoUrl, user.aboutMe));
+        else
+            return new errorResult(constMessage.bosAlanBirakmayin);
+
         async function degerlerVarMi(body) {
             if (!body.userName && !body.firstName && !body.lastName && !body.password && !body.age && !body.email && !body.aboutMe)
                 return true;

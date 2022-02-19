@@ -20,7 +20,8 @@ const authDao = {
                 return new successDataResult(loginUser[0], constMessage.KullaniciBulundu);
 
             } else {
-                return new errorResult(constMessage.KullaniciBulunamadi);
+              
+                return new errorResult(constMessage.sifreVeyaEpostaYanlis);
             }
 
         } catch (error) {
