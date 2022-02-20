@@ -5,10 +5,8 @@ const constMessage={
     kullaniciBulundu:"Kullanıcı Bulundu",
     sifreYanlis:"Şifre yanlış",
     sifreVeyaEpostaYanlis:"Şifre veya e-posta adresi yanlış",
-
-
     basariylaKaydoldun:"Başarıyla Kaydoldun",
-    kaydolmaBasarisiz:"Kaydolama başarısız",
+    kaydolmaBasarisiz:"Kaydolma başarısız",
 
     birSeylerYanlisGitti:"Bir şeyler yanlış gitti",
     bosAlanBirakmayin:"Boş alan bırakmayın",
