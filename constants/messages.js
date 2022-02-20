@@ -15,8 +15,9 @@ const constMessage={
 
     tokenOlusturmaBasarisiz:"Token oluşturma başarısız",
     tokenOlusturuldu:"Token oluşturuldu",
-    tokenDogrulanamadi:"Token doğrulanamadi",
-    tokenDogrulandi:"Token Doğrulandı",
+    tokenDogrulanamadi:"Token doğrulanamadı",
+    tokenDogrulandi:"Token doğrulandı",
+    tokenYok:"Token yok",
 
     yetkinizYok:"Yetkiniz yok",
 

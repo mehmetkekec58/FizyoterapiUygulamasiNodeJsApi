@@ -13,7 +13,8 @@ const successResult = require("../result/successResult");
 
 
 
-router.post("/login", async (req, res) => {
+
+router.post("/login",  async (req, res) => {
   try {
     const auth = await authService.login(req.body)
     if (auth.success) {

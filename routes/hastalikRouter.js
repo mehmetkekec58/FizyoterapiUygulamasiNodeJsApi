@@ -5,7 +5,7 @@ const successResult = require('../result/successResult');
 const successDataResult = require('../result/successDataResult');
 const hastalikService = require('../services/hastalikService');
 const router = require('express').Router();
-
+const { tokenDogrula, jwtDogrulama } = require('../helper/tokenHelper');
 
 router.get("/getall", async (req, res) => {
 
@@ -36,46 +36,78 @@ router.get("/getbyid", async (req, res) => {
     }
 })
 
-router.post("/add", async (req, res) => {
+router.post("/add", tokenDogrula, async (req, res) => {
     try {
-        const addHastalik = await hastalikService.add(req.body)
-        if (addHastalik.success) {
-            res.status(200).json(addHastalik)
-        } else {
-            res.status(500).json(addHastalik)
-        }
+        const tokenDogrulama = await jwtDogrulama(req.token)
+        if (tokenDogrulama.success) {
+
+            if (tokenDogrulama.data.user.yetki == "admin") {
+
+                const addHastalik = await hastalikService.add(req.body)
+
+                if (addHastalik.success)
+                    res.status(200).json(addHastalik)
+                else
+                    res.status(500).json(addHastalik)
+
+            } else
+                res.status(403).json(new errorResult(constMessage.yetkinizYok))
+
+        } else
+            res.status(401).json(new errorResult(constMessage.tokenDogrulanamadi))
+
+
 
     } catch (error) {
-  
-        res.status(500).json(new errorDataResult(error,constMessage.birSeylerYanlisGitti))
+
+        res.status(500).json(new errorDataResult(error, constMessage.birSeylerYanlisGitti))
     }
 })
 
-router.post("/update", async (req, res) => {
+router.post("/update", tokenDogrula, async (req, res) => {
     try {
-      
-        const updateHastalik = await hastalikService.updateHastalik(req.body);
+        const tokenDogrulama = await jwtDogrulama(req.token)
+        if (tokenDogrulama.success) {
 
-        if (updateHastalik.success) {
-            res.status(200).json(updateHastalik)
-        } else {
-            res.status(500).json(updateHastalik)
-        }
+            if (tokenDogrulama.data.user.yetki == "admin") {
+                const updateHastalik = await hastalikService.updateHastalik(req.body);
+
+                if (updateHastalik.success)
+                    res.status(200).json(updateHastalik)
+                else
+                    res.status(500).json(updateHastalik)
+
+            } else
+                res.status(403).json(new errorResult(constMessage.yetkinizYok))
+
+        } else
+            res.status(401).json(new errorResult(constMessage.tokenDogrulanamadi))
+
     } catch (error) {
         res.status(500).json(new errorDataResult(error, constMessage.birSeylerYanlisGitti))
     }
 })
 
-router.delete("/delete", async (req, res) => {
+router.delete("/delete", tokenDogrula, async (req, res) => {
     try {
-      
-        const deleteHastalik = await hastalikService.deleteHastalik(req.query);
+        const tokenDogrulama = await jwtDogrulama(req.token)
+        if (tokenDogrulama.success) {
 
-        if (deleteHastalik.success) {
-            res.status(200).json(deleteHastalik)
-        } else {
-            res.status(500).json(deleteHastalik)
-        }
+            if (tokenDogrulama.data.user.yetki == "admin") {
+                const deleteHastalik = await hastalikService.deleteHastalik(req.query);
+
+                if (deleteHastalik.success)
+                    res.status(200).json(deleteHastalik)
+                else
+                    res.status(500).json(deleteHastalik)
+
+            } else
+                res.status(403).json(new errorResult(constMessage.yetkinizYok))
+
+        } else
+            res.status(401).json(new errorResult(constMessage.tokenDogrulanamadi))
+
+
     } catch (error) {
         res.status(500).json(new errorDataResult(error, constMessage.birSeylerYanlisGitti))
     }

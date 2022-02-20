@@ -14,7 +14,7 @@ const tokenHelper = {
     async tokenCreate(user) {
         
         let exp = Math.floor(Date.now() / 1000) + (60 * 60);
-        var token = await jwt.sign({ Expiration: exp, user: user }, defaultValue.secretkey);
+        var token = jwt.sign({ Expiration: exp, user: user }, defaultValue.secretkey);
         if (token) {
             return new successDataResult(new Token(token, exp), constMessage.tokenOlusturuldu);
         }
@@ -23,21 +23,27 @@ const tokenHelper = {
     },
     tokenDogrula(req, res, next) {
         const bearerHeader = req.headers['authorization'];
-        if (typeof bearerHeader !== undefined) {
+        if (bearerHeader !== undefined) {
             const bearerToken = bearerHeader.split(' ')[1];
-            req.token = bearerToken
-            next()
+            req.token = bearerToken;
+            next();
         } else {
-            return new errorDataResult(403, constMessage.yetkinizYok)
+            res.status(403).json(new errorResult(constMessage.tokenYok)) 
         }
     },
     async jwtDogrulama(token) {
-        var decoded = await jwt.verify(token, defaultValue.secretkey);
+        try {
+            const decoded = jwt.verify(token, defaultValue.secretkey);
+      //  console.log(decoded)
         if (decoded) {
-            return new successDataResult(decoded.user, constMessage.tokenDogrulandi)
+            return new successDataResult(decoded, constMessage.tokenDogrulandi)
         } else {
-            return new errorDataResult(403, constMessage.tokenDogrulanamadi)
+            return new errorResult(constMessage.tokenDogrulanamadi)
         }
+        } catch (error) {
+            return new errorResult(constMessage.tokenDogrulanamadi)
+        }
+        
     }
 }
 module.exports = tokenHelper
