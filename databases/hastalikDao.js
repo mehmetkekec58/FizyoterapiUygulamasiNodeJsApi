@@ -20,7 +20,7 @@ var HastalikDao = {
                 return new errorResult(constMessage.hastaliklarListelenemedi);
             }
         } catch (error) {
-            return new errorDataResult(error, constMessage.birSeylerYanlisGitti);
+            return new errorDataResult(error.detail);
         }
     },
     async getById(id) {
@@ -33,7 +33,7 @@ var HastalikDao = {
                 return new errorDataResult(constMessage.hastalikGetirilemedi);
             }
         } catch (error) {
-            return new errorDataResult(error, constMessage.birSeylerYanlisGitti);
+            return new errorDataResult(error.detail);
         }
     },
     async add(hastalik) {
@@ -47,7 +47,7 @@ var HastalikDao = {
                 return new errorResult(constMessage.hastalikEklenemedi);
             }
         } catch (error) {
-            return new errorDataResult(error, constMessage.birSeylerYanlisGitti);
+            return new errorDataResult(error.detail);
         }
     },
     async updateHastalik(hastalik) {
