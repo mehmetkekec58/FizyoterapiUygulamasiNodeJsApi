@@ -1,9 +1,11 @@
 const router = require('express').Router();
 
 
-router.post("/",(req,res)=>{
+router.get("/",(req,res)=>{
 
- res.status(500).json(true)
+
+ res.status(500).json("fonksiyon deneme sayfası")
+
   
 })
 module.exports=router

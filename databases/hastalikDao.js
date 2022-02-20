@@ -13,7 +13,6 @@ var HastalikDao = {
         let sql = "SELECT * FROM hastaliklar";
         try {
             const hastaliklar = (await pool.query(sql)).rows;
-            //  console.log(hastaliklar.find(p=>p.id == 1))  
             if (hastaliklar.length > 0) {
                 return new successDataResult(hastaliklar, constMessage.hastaliklarlistelendi);
             } else {

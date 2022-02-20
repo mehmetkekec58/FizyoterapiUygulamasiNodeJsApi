@@ -27,7 +27,7 @@ var icerikService ={
             if (body.hastalikId && body.gifUrl && body.aciklama && body.siralama)
                 return true;
             else
-                return false;
+                return false; 
     }
  },
  async updateIcerik(icerik){

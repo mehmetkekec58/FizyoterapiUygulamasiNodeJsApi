@@ -34,7 +34,7 @@ const tokenHelper = {
     async jwtDogrulama(token) {
         try {
             const decoded = jwt.verify(token, defaultValue.secretkey);
-      //  console.log(decoded)
+
         if (decoded) {
             return new successDataResult(decoded, constMessage.tokenDogrulandi)
         } else {
