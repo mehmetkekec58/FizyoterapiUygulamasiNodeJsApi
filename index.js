@@ -15,7 +15,13 @@ app.use(helmet());
 app.get("/", (req, res) => {
     res.send("anasayfa")
 })
-
+app.use(function (req, res, next) {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+    res.setHeader('Access-Control-Allow-Credentials', true);
+    next();
+});
 app.use("/api/auth", authRoute);
 app.use("/api/hastalik", hastalikRoute);
 app.use("/api/deneme", denemeRoute);

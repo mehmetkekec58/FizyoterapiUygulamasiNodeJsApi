@@ -7,7 +7,8 @@ const hastalikService = require('../services/hastalikService');
 const router = require('express').Router();
 const { tokenDogrula, jwtDogrulama } = require('../helper/tokenHelper');
 
-router.get("/getall", async (req, res) => {
+
+router.get("/getall",  async (req, res) => {
 
     try {
         const hastalikGetAll = await hastalikService.getAll()
